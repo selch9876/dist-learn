@@ -26,6 +26,23 @@ class AdminController extends Controller
         ]);
     }
 
+    public function students()
+    {
+        $user = Auth::user();
+        $packages = DB::select('select * from packages');
+        $customers = Customer::all();
+        
+        $sumAge = (int)$customers->sum('age');
+        $avarageAge = (int)($sumAge / count($customers));
+
+        return view('admin.students', [
+            'packages' => $packages, 
+            'user' => $user, 
+            'customers' => $customers, 
+            'avarageAge' => $avarageAge
+        ]);
+    }
+
     public function addStudent()
     {
         $user = Auth::user();   

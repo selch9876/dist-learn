@@ -38,7 +38,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-graduation-cap"></i> <span>DistLearn</span></a>
+              <a href="{{ route('home.index') }}" class="site_title" target="_blank"><i class="fa fa-graduation-cap"></i> <span>DistLearn</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -81,9 +81,24 @@
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a>
-                  <a class="dropdown-item"  href="javascript:;">Help</a>
-                    <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    <a class="dropdown-item"  href="javascript:;">Help</a>
+                    
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out pull-right"></i>
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                   </div>
+
+                  
+                    
+                
+
+
                 </li>
 
                 <li role="presentation" class="nav-item dropdown open">
@@ -155,6 +170,16 @@
           </div>
         </div>
         <!-- /top navigation -->
+
+
+        <div class="container pt-5">
+
+          @if (session('status'))
+              <div class="alert alert-success">
+                {{ session('status') }}
+              </div>
+          @endif
+        </div>
 
         @yield('content')
         

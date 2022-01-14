@@ -52,6 +52,7 @@
 <script src="{{ asset('assets/build/js/custom.min.js') }}"></script>
 {{--  Datepicker  --}}
 <script src="{{ asset('assets/production/js/datepicker/datepicker.js') }}"></script>
+  
 
 </body>
 </html>

@@ -3,13 +3,13 @@
     <div class="menu_section">
       <h3>General</h3>
       <ul class="nav side-menu">
-        <li><a href="{{ route('admin.home.index') }}"><i class="fa fa-home"></i> Home <i class="fas fa-chevron-down"></i></a>
+        <li><a href="{{ route('admin.index') }}"><i class="fa fa-home"></i> Home <i class="fas fa-chevron-down"></i></a>
           
         </li>
         <li><a><i class="fa fa-edit"></i> Students <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="{{ route('admin.home.addstudent') }}">Add Student</a></li>
-            <li><a href="form_advanced.html">Advanced Components</a></li>
+            <li><a href="{{ route('admin.addstudent') }}">Add Student</a></li>
+            <li><a href="{{ route('admin.students') }}">Student List</a></li>
             <li><a href="form_validation.html">Form Validation</a></li>
             <li><a href="form_wizards.html">Form Wizard</a></li>
             <li><a href="form_upload.html">Form Upload</a></li>

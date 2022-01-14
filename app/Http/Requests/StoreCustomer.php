@@ -25,8 +25,6 @@ class StoreCustomer extends FormRequest
     {
         return [
             'customer_name'=>'bail|min:5|max:100',
-            'customer_body' => 'required|min:10',
-            'thumbnail' => 'image',
         ];
     }
 }

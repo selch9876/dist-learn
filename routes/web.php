@@ -22,21 +22,22 @@ use App\Http\Controllers\PackagesController;
     return view('welcome');
 }); */
 
+
+Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-Route::get('/customerregister', function () {
-    return view('customers.register');
-})->name('customers.register');
+
 
 Route::get('/packages', [PackagesController::class, 'index'])->name('packages.index');
 
 Route::resource('packages', PackagesController::class); // Gerekli bütün route'ları oluşturur
-Auth::routes();
-
-Route::get('/admin', [AdminController::class, 'adminIndex'])->name('admin.home.index');
-Route::get('/admin/add', [AdminController::class, 'addstudent'])->name('admin.home.addstudent');
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/admin', [AdminController::class, 'adminIndex'])->name('admin.index');
+Route::get('/admin/add', [AdminController::class, 'addstudent'])->name('admin.addstudent');
+Route::get('/admin/students', [AdminController::class, 'students'])->name('admin.students');
+
+
 Route::get('/team', [HomeController::class, 'team'])->name('home.team');
 Route::get('/reviews', [HomeController::class, 'reviews'])->name('home.reviews');
 Route::resource('customers', CustomerController::class);

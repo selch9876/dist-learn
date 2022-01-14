@@ -61,8 +61,8 @@
                          <li><a href="logout.php">Logout</a></li>
                               <li><a href="profile.php">My Profile</a></li>
                          <?php else: ?>
-                              <li><a href="login.php">Login</a></li>
-                              <li><a href="{{ route('customers.register') }}">Register</a></li>
+                              <li><a href="{{ route('login') }}">Login</a></li>
+                              <li><a href="{{ route('customers.create') }}">Register</a></li>
                          <?php endif; ?>
                     </ul>
 
@@ -74,6 +74,14 @@
           </div>
      </section>
 
+     <div class="container pt-5">
+
+          @if (session('status'))
+              <div class="alert alert-success">
+                {{ session('status') }}
+              </div>
+          @endif
+     </div>
 
      @yield('content')
 

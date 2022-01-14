@@ -15,7 +15,7 @@ class CustomerController extends Controller
     public function __construct()
     {
         $this->middleware('auth')
-        ->only(['create', 'store', 'edit', 'update', 'destroy']);
+        ->only(['create', 'store', 'edit', 'update', 'destroy', 'index']);
     }
     /**
      * Display a listing of the resource.
@@ -31,7 +31,7 @@ class CustomerController extends Controller
         $sumAge = (int)$customers->sum('age');
         $avarageAge = (int)($sumAge / count($customers));
 
-        return view('admin.index', [
+        return view('admin.students', [
             'packages' => $packages, 
             'user' => $user, 
             'customers' => $customers, 
@@ -46,7 +46,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('admin.addstudent');
+        return view('customers.add');
     }
 
     /**
@@ -58,20 +58,24 @@ class CustomerController extends Controller
     public function store(StoreCustomer $request)
     {
         $validated = $request->validated();
-        $validated['user_id'] = $request->user()->id;
-        $customer =  Customer::create($validated);
+        //$validated['user_id'] = $request->user()->id;
+        $customer =  new Customer();
+        $customer->customer_name = $validated['customer_name'];
+        $customer->customer_email = $request['customer_email'];
+        $customer->customer_phone = $request['customer_phone'];
+        $customer->customer_password = $request['password'];
+        $customer->save();
         
-        if ($request->hasFile('thumbnail')) {
+        /* if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('thumbnails');
             $customer->image()->save(
                 Image::create(['path'=>$path])
             );
-        }
+        } */
 
-        
         $request->session()->flash('status', 'The student was created');
 
-        return redirect()->route('admin.customer', ['customer'=>$customer->id]);
+        return redirect()->route('home.index', ['customer'=>$customer->id]);
     }
 
     /**
