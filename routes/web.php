@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PackagesController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,4 @@ Route::get('/admin/students', [AdminController::class, 'students'])->name('admin
 
 Route::get('/team', [HomeController::class, 'team'])->name('home.team');
 Route::get('/reviews', [HomeController::class, 'reviews'])->name('home.reviews');
-Route::resource('customers', CustomerController::class);
+Route::resource('students', StudentController::class);

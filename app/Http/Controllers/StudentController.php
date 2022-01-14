@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
-use App\Models\Customer;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\StoreCustomer;
 use Illuminate\Support\Facades\Auth;
 
-class CustomerController extends Controller
+class StudentController extends Controller
 {
 
     public function __construct()
@@ -26,15 +24,15 @@ class CustomerController extends Controller
     {
         $user = Auth::user();
         $packages = DB::select('select * from packages');
-        $customers = Customer::all();
+        $students = Student::all();
         
-        $sumAge = (int)$customers->sum('age');
-        $avarageAge = (int)($sumAge / count($customers));
+        $sumAge = (int)$students->sum('age');
+        $avarageAge = (int)($sumAge / count($students));
 
         return view('admin.students', [
             'packages' => $packages, 
             'user' => $user, 
-            'customers' => $customers, 
+            'students' => $students, 
             'avarageAge' => $avarageAge
         ]);
     }
@@ -46,7 +44,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customers.add');
+        return view('students.add');
     }
 
     /**
@@ -55,16 +53,16 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCustomer $request)
+    public function store(Request $request)
     {
         $validated = $request->validated();
         //$validated['user_id'] = $request->user()->id;
-        $customer =  new Customer();
-        $customer->customer_name = $validated['customer_name'];
-        $customer->customer_email = $request['customer_email'];
-        $customer->customer_phone = $request['customer_phone'];
-        $customer->customer_password = $request['password'];
-        $customer->save();
+        $student =  new Student();
+        $student->name = $validated['customer_name'];
+        $student->email = $request['customer_email'];
+        $student->phone = $request['customer_phone'];
+        $student->password = $request['password'];
+        $student->save();
         
         /* if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('thumbnails');
@@ -75,16 +73,16 @@ class CustomerController extends Controller
 
         $request->session()->flash('status', 'The student was created');
 
-        return redirect()->route('home.index', ['customer'=>$customer->id]);
+        return redirect()->route('home.index', ['customer'=>$student->id]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Student $student)
     {
         //
     }
@@ -92,10 +90,10 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Student $student)
     {
         //
     }
@@ -104,10 +102,10 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Student $student)
     {
         //
     }
@@ -115,10 +113,10 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Student $student)
     {
         //
     }

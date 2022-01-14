@@ -30,15 +30,15 @@
                     </thead>
 
                     <tbody>
-                        @forelse ($customers as $customer)
+                        @forelse ($students as $student)
                         <tr class="even pointer">
                             <td class="a-center ">
                             <input type="checkbox" class="flat" name="table_records">
                             </td>
-                            <td class=" ">{{ $customer->customer_name }}</td>
-                            <td class=" ">{{ $customer->customer_email }} </td>
-                            <td class=" ">{{ $customer->customer_phone }}</td>
-                            <td class=" ">{{ $customer->age }}</td>
+                            <td class=" ">{{ $student->name }}</td>
+                            <td class=" ">{{ $student->email }} </td>
+                            <td class=" ">{{ $student->phone }}</td>
+                            <td class=" ">{{ $student->age }}</td>
                             </td>
                         </tr>
                         @empty

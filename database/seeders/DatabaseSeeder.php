@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         
         $this->call([
             UsersTableSeeder::class,
-            CustomersTableSeeder::class,
+            StudentsTableSeeder::class,
         ]);
     }
 }

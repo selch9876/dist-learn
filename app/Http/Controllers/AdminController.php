@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,15 +14,15 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $packages = DB::select('select * from packages');
-        $customers = Customer::all();
+        $students = Student::all();
         
-        $sumAge = (int)$customers->sum('age');
-        $avarageAge = (int)($sumAge / count($customers));
+        $sumAge = (int)$students->sum('age');
+        $avarageAge = (int)($sumAge / count($students));
 
         return view('admin.index', [
             'packages' => $packages, 
             'user' => $user, 
-            'customers' => $customers, 
+            'customers' => $students, 
             'avarageAge' => $avarageAge
         ]);
     }
@@ -30,15 +31,15 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $packages = DB::select('select * from packages');
-        $customers = Customer::all();
+        $students = Student::all();
         
-        $sumAge = (int)$customers->sum('age');
-        $avarageAge = (int)($sumAge / count($customers));
+        $sumAge = (int)$students->sum('age');
+        $avarageAge = (int)($sumAge / count($students));
 
         return view('admin.students', [
             'packages' => $packages, 
             'user' => $user, 
-            'customers' => $customers, 
+            'students' => $students, 
             'avarageAge' => $avarageAge
         ]);
     }
