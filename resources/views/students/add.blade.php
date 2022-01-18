@@ -14,7 +14,7 @@
               <div class="card">
                 <div class="card-body register-card-body">
                   
-                  <form  action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data" class="form-horizontal form-label-left">
+                  <form  action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data" class="form-horizontal form-label-left">
                     @csrf
                     @include('admin.partials.studentform')
                     <div class="ln_solid"></div>
@@ -27,7 +27,7 @@
                       <!-- /.col -->
                       <!-- /.col -->
                   </form>
-                  <a href="login.php" class="text-center">Already Registered</a>
+                  <a href="{{ route('login') }}" class="text-center">Already Registered</a>
                 </div><!-- /.form-box -->
               </div><!-- /.card -->
             </div>

@@ -16,10 +16,4 @@ class HomeTest extends TestCase
      */
     
 
-    public function testHomePageWorkingCorrectly()
-    {
-        $response = $this->get('/');
-        $response->assertSeeText('Copyright © Selçuk Oktay');
-        $response->assertStatus(200);
-    }
 }

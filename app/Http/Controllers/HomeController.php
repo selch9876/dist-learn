@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -27,7 +25,8 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('contact', 'index', 'home', 'team', 'reviews');
+        /* $this->middleware('auth')->except('contact', 'index', 'home', 'team', 'reviews'); */
+        $this->middleware('auth', ['except' => ['index', 'team', 'reviews']]);
     }
 
 }

@@ -1,4 +1,4 @@
-@extends('admin.layouts.adminapp')
+@extends('layouts.adminapp')
 
 
 @section('content')
@@ -16,7 +16,7 @@
 
             <div class="x_content">
             <br />
-                <form action="{{ route('customers.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+                <form action="{{ route('students.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
                 @csrf
                 @include('admin.partials.studentform')
                     <div class="ln_solid"></div>

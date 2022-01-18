@@ -22,4 +22,13 @@ class StudentFactory extends Factory
             'age' => $random,
         ];
     }
+
+    public function newTitle()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'New Student',
+            ];
+        });
+    }
 }

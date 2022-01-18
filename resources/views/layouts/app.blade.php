@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-     <title>DistLean - Distance Education System</title>
+     <title>@yield('title')</title>
 
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -34,8 +34,7 @@
 
      <!-- MENU -->
      <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
-          <div class="container">
-
+          <div class="container"> 
                <div class="navbar-header">
                     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                          <span class="icon icon-bar"></span>
@@ -44,31 +43,54 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">DistLearn</a>
+                    <a href="{{ route('home.index') }}" class="navbar-brand">DistLearn</a>
                </div>
 
                <!-- MENU LINKS -->
-               <div class="collapse navbar-collapse">
+               <div class="collapse navbar-collapse mb-5" >
                     <ul class="nav navbar-nav navbar-nav-first">
+
                          <li><a href="{{ route('home.index') }}" class="smoothScroll">Home</a></li>
                          <li><a href="#about" class="smoothScroll">About</a></li>
                          <li><a href="{{ route('home.team') }}" class="smoothScroll">Our Teachers</a></li>
                          <li><a href="{{ route('packages.index') }}" class="smoothScroll">Packages</a></li>
                          <li><a href="{{ route('home.reviews') }}" class="smoothScroll">Reviews</a></li>
                          <li><a href="#contact" class="smoothScroll">Contact</a></li>
-                         <?php if(isset($_SESSION['customer_email'])): ?>
-
-                         <li><a href="logout.php">Logout</a></li>
-                              <li><a href="profile.php">My Profile</a></li>
-                         <?php else: ?>
-                              <li><a href="{{ route('login') }}">Login</a></li>
-                              <li><a href="{{ route('customers.create') }}">Register</a></li>
-                         <?php endif; ?>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
+                         
+                        <!-- Authentication Links -->
+                        
+                         @if (Auth::guard('student')->check())
+                         <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   {{Auth::guard('student')->user()->name}}
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('student.dashboard') }}">Profile</a>
+                                <form id="logout-form" action="{{ route('student.logout') }}" method="get">
+                                   @csrf
+                                   <a id="submitLink" class="dropdown-item" href="#">Logout</a>
+                                </form>  
+                              </div>
+                            </li>
+                         
+                         @else
+                         <li><a  href="{{ route('student.login') }}">{{ __('Login') }}</a></li>
+                              @if (Route::has('register'))
+                              <li ><a  href="{{ route('student.register') }}">{{ __('Register') }}</a></li>
+                              @endif
+                         @endif
+                         
+                         {{--  @if(Auth::user())
+                              @if (Auth::user()->is_admin == true)
+                              <li><a href="{{ route('admin.index') }}" class="smoothScroll">Admin</a></li>   
+                              @endif
+                         @endif  --}}
+                         
                          <li><a href="#"><i class="fa fa-phone"></i> +90 123 45 67</a></li>
+                         
                     </ul>
+
+                    
                </div>
 
           </div>
@@ -82,7 +104,7 @@
               </div>
           @endif
      </div>
-
+   
      @yield('content')
 
 
@@ -164,6 +186,12 @@
      <script src="{{ URL::asset('known/js/owl.carousel.min.js') }}"></script>
      <script src="{{ URL::asset('known/js/smoothscroll.js') }}"></script>
      <script src="{{ URL::asset('known/js/custom.js') }}"></script>
+
+     <script>
+     document.getElementById("submitLink").onclick = function() {
+    document.getElementById("logout-form").submit();
+     }
+     </script>
 
 </body>
 </html>

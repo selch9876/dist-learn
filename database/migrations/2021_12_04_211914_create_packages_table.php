@@ -16,11 +16,11 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->text('package_name');
-            $table->text('package_body');
-            $table->enum('package_duration', ['3 months','6 months','9 months','12 months']);
-            $table->text('package_image');
-            $table->integer('package_price');
+            $table->text('name');
+            $table->text('content');
+            $table->enum('duration', ['3 months','6 months','9 months','12 months']);
+            $table->text('image');
+            $table->integer('price');
         });
     }
 

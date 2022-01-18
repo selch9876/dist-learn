@@ -3,7 +3,7 @@
                 <div class="form-group row ">
                     <label class="control-label col-md-3 col-sm-3 ">Name</label>
                     <div class="col-md-9 col-sm-9 ">
-                        <input type="text" class="form-control" placeholder="Name" name="customer_name">
+                        <input type="text" class="form-control" placeholder="Name" name="name">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -15,7 +15,7 @@
                 <div class="form-group row ">
                     <label class="control-label col-md-3 col-sm-3 ">Email</label>
                     <div class="col-md-9 col-sm-9 ">
-                        <input type="email" class="form-control" placeholder="Email" name="customer_email">
+                        <input type="email" class="form-control" placeholder="Email" name="email">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -27,7 +27,7 @@
                 <div class="form-group row ">
                     <label class="control-label col-md-3 col-sm-3 ">Phone</label>
                     <div class="col-md-9 col-sm-9 ">
-                        <input type="tel" class="form-control" placeholder="Phone" name="customer_phone">
+                        <input type="tel" class="form-control" placeholder="Phone" name="phone">
                     </div>
                 </div>
                 

@@ -5,36 +5,35 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreStudent;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth')
-        ->only(['create', 'store', 'edit', 'update', 'destroy', 'index']);
+        $this->middleware('auth:student')
+        ->only(['edit', 'update', 'destroy', 'index', 'dashboard']);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function dashboard()
     {
         $user = Auth::user();
-        $packages = DB::select('select * from packages');
-        $students = Student::all();
-        
-        $sumAge = (int)$students->sum('age');
-        $avarageAge = (int)($sumAge / count($students));
-
-        return view('admin.students', [
-            'packages' => $packages, 
-            'user' => $user, 
-            'students' => $students, 
-            'avarageAge' => $avarageAge
+        return view('students.dashboard', [
+            'user'=> $user,
         ]);
+    }
+
+    public function index()
+    {
+        $packages = DB::select('select * from packages');
+        return view('home.index', ['packages' => $packages]);
     }
 
     /**
@@ -53,15 +52,15 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreStudent $request)
     {
         $validated = $request->validated();
         //$validated['user_id'] = $request->user()->id;
         $student =  new Student();
-        $student->name = $validated['customer_name'];
-        $student->email = $request['customer_email'];
-        $student->phone = $request['customer_phone'];
-        $student->password = $request['password'];
+        $student->name = $request['name'];
+        $student->email = $validated['email'];
+        $student->phone = $request['phone'];
+        $student->password = Hash::make($validated['password']);
         $student->save();
         
         /* if ($request->hasFile('thumbnail')) {
@@ -71,9 +70,10 @@ class StudentController extends Controller
             );
         } */
 
+
         $request->session()->flash('status', 'The student was created');
 
-        return redirect()->route('home.index', ['customer'=>$student->id]);
+        return redirect()->route('home.index', ['student'=>$student->id]);
     }
 
     /**

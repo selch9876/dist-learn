@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -12,19 +11,24 @@ class AdminController extends Controller
 {
     public function adminIndex()
     {
+        
         $user = Auth::user();
         $packages = DB::select('select * from packages');
         $students = Student::all();
         
         $sumAge = (int)$students->sum('age');
         $avarageAge = (int)($sumAge / count($students));
-
-        return view('admin.index', [
-            'packages' => $packages, 
-            'user' => $user, 
-            'customers' => $students, 
-            'avarageAge' => $avarageAge
-        ]);
+        if ($user->is_admin) {
+            return view('admin.index', [
+                'packages' => $packages, 
+                'user' => $user, 
+                'students' => $students, 
+                'avarageAge' => $avarageAge
+            ]);
+        } else {
+            return view('auth.login');
+        }
+        
     }
 
     public function students()

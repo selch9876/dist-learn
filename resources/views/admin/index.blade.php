@@ -1,4 +1,4 @@
-@extends('admin.layouts.adminapp')
+@extends('layouts.adminapp')
 
 
 @section('content')
@@ -11,7 +11,7 @@
     <div class="tile_count">
       <div class="col-md-2 col-sm-4  tile_stats_count">
         <span class="count_top"><i class="fa fa-user"></i> Total Students</span>
-        <div class="count">{{ count($customers) }}</div>
+        <div class="count">{{ count($students) }}</div>
         <span class="count_bottom"><i class="green">4% </i> From last Week</span>
       </div>
       <div class="col-md-2 col-sm-4  tile_stats_count">

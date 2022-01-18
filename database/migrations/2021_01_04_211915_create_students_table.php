@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration
             /* $table->bigInteger('user_id')->unsigned()->unique();
             $table->foreign('user_id')->references('id')->on('users'); */
             $table->text('name');
-            $table->text('email');
+            $table->text('email')->unique();
             $table->text('phone');
             $table->text('password');
             /* $table->bigInteger('package_type_id')->unsigned()->unique();
