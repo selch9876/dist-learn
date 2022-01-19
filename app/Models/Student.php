@@ -24,4 +24,9 @@ class Student extends Authenticatable
     {
         return $this->hasOne(Package::class);
     }
+
+    public function image()
+    {
+        return $this->hasOne(Image::class);
+    }
 }

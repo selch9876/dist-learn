@@ -35,11 +35,16 @@ Route::get('/team', [HomeController::class, 'team'])->name('home.team');
 Route::get('/reviews', [HomeController::class, 'reviews'])->name('home.reviews');
 Route::resource('packages', PackagesController::class); // Gerekli bütün route'ları oluşturur
 
-
+//Route::resource('admin',AdminController::class);
 
 Route::get('/admin', [AdminController::class, 'adminIndex'])->name('admin.index');
-Route::get('/admin/add', [AdminController::class, 'addstudent'])->name('admin.addstudent');
 Route::get('/admin/students', [AdminController::class, 'students'])->name('admin.students');
+Route::get('/admin/add', [AdminController::class, 'addStudent'])->name('admin.addstudent');
+Route::get('/admin/{student}/edit', [AdminController::class, 'editStudent'])->name('admin.editstudent');
+Route::put('/admin/students/{student}', [AdminController::class, 'updateStudent'])->name('admin.updatestudent');
+Route::get('/admin/{student}', [AdminController::class, 'showStudent'])->name('admin.showstudent');
+Route::delete('/admin/{student}', [AdminController::class, 'destroyStudent'])->name('admin.destroystudent');
+
 
 
 Route::get('/students/login', [StudentAuthController::class, 'showLoginForm'])->name('student.login');

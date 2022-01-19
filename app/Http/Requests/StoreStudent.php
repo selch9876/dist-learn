@@ -24,8 +24,10 @@ class StoreStudent extends FormRequest
     public function rules()
     {
         return [
+            'name'=> 'min:5|max:100',
             'email' => 'required|email',
             'password' => 'required',
+            'thumbnail' => 'image',
         ];
     }
 }
